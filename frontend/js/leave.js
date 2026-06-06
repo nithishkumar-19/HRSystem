@@ -20,10 +20,10 @@ function applyLeave() {
         fromDate: document.getElementById("fromDate").value,
         toDate: document.getElementById("toDate").value,
         reason: document.getElementById("reason").value,
-        noOfDays: calculateDays()
+        noOfDays: 2
     };
 
-    fetch("http://localhost:8080/leave", {
+    fetch("http://localhost:8080/leave/apply-leave", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

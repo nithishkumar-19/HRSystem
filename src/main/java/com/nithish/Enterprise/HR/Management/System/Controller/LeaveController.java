@@ -29,7 +29,7 @@ public class LeaveController {
         return leaveService.getEmployeeLeaves(employeeId);
     }
 
-    @PostMapping
+    @PostMapping("apply-leave")
     public LeaveRequest applyLeave(@Valid @RequestBody LeaveRequestDTO dto) {
 
         return leaveService.applyLeave(dto);
