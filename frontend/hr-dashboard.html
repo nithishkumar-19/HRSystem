@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HR Dashboard</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+</head>
+
+<script>
+    if(!localStorage.getItem("auth")){
+        window.location.href="login.html";
+    }
+</script>
+
+<body class="bg-light">
+
+<div class="container mt-5">
+
+    <h1 class="text-center mb-5">
+        HR Dashboard
+    </h1>
+
+    <div class="row">
+
+        <div class="col-md-3">
+            <div class="card shadow p-3 text-center">
+
+                <h5>Employees</h5>
+
+                <a href="employee.html"
+                   class="btn btn-primary mt-2">
+                    Manage Employees
+                </a>
+
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow p-3 text-center">
+
+                <h5>Leaves</h5>
+
+                <a href="leave.html"
+                   class="btn btn-success mt-2">
+                    Manage Leaves
+                </a>
+
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow p-3 text-center">
+
+                <h5>Certifications</h5>
+
+                <a href="certification.html"
+                   class="btn btn-warning mt-2">
+                    Manage Certifications
+                </a>
+
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow p-3 text-center">
+
+                <h5>Payslips</h5>
+
+                <a href="payslip.html"
+                   class="btn btn-danger mt-2">
+                    Manage Payslips
+                </a>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

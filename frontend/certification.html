@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Certification Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<script>
+    if(!localStorage.getItem("auth")){
+        window.location.href="login.html";
+    }
+</script>
+
+<body class="bg-light">
+
+<div class="container mt-4">
+
+    <h2>Certification Management</h2>
+
+    <!-- UPLOAD CERTIFICATION -->
+    <div class="card p-3 mt-3">
+
+        <h5>Upload Certification</h5>
+
+        <div class="row">
+
+            <div class="col-md-3">
+                <input id="employeeId" class="form-control" placeholder="Employee ID">
+            </div>
+
+            <div class="col-md-3">
+                <input id="certName" class="form-control" placeholder="Certification Name">
+            </div>
+
+            <div class="col-md-3">
+                <input id="org" class="form-control" placeholder="Issuing Organization">
+            </div>
+
+            <div class="col-md-3">
+                <input id="filePath" class="form-control" placeholder="File Path">
+            </div>
+
+        </div>
+
+        <button class="btn btn-primary mt-3" onclick="uploadCertification()">
+            Upload
+        </button>
+
+    </div>
+
+    <!-- TABLE -->
+    <div class="card p-3 mt-4">
+
+        <h5>Certification List</h5>
+
+        <table class="table table-bordered mt-2">
+
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Org</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+
+            <tbody id="certTable"></tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/certification.js"></script>
+
+<script>
+    loadCertifications();
+</script>
+
+</body>
+</html>
