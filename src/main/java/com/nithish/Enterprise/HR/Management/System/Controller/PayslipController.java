@@ -18,12 +18,12 @@ public class PayslipController {
     }
 
     @PostMapping("/generate")
-    public Payslip generatePayslip(@RequestBody PayslipDTO dto) {
+    public PayslipDTO generatePayslip(@RequestBody PayslipDTO dto) {
         return payslipService.generatePayslip(dto);
     }
 
     @GetMapping("/employee/{employeeId}")
-    public List<Payslip> getPayslips(@PathVariable Long employeeId) {
+    public List<PayslipDTO> getPayslips(@PathVariable Long employeeId) {
         return payslipService.getEmployeePayslips(employeeId);
     }
 }

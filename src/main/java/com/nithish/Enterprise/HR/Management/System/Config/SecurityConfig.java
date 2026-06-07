@@ -39,7 +39,7 @@ public class SecurityConfig {
                         .hasAnyRole("HR","MANAGER","EMPLOYEE")
 
                         .requestMatchers("/payslip/**")
-                        .hasRole("HR")
+                        .hasAnyRole("HR" , "EMPLOYEE")
 
                         .anyRequest().authenticated()
                 )

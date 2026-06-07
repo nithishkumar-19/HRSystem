@@ -13,6 +13,8 @@ public class PayslipDTO {
     @NotNull(message = "Employee ID required")
     private Long employeeId;
 
+    private String Name;
+
     @NotBlank(message = "Month required")
     private String month;
 

@@ -4,25 +4,25 @@ import com.nithish.Enterprise.HR.Management.System.Dto.PayslipDTO;
 import com.nithish.Enterprise.HR.Management.System.Entity.Employee;
 import com.nithish.Enterprise.HR.Management.System.Entity.Payslip;
 import com.nithish.Enterprise.HR.Management.System.Exception.ResourceNotFoundException;
+import com.nithish.Enterprise.HR.Management.System.Mapper.PayslipMapper;
 import com.nithish.Enterprise.HR.Management.System.Repository.EmployeeRepository;
 import com.nithish.Enterprise.HR.Management.System.Repository.PayslipRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class PayslipService {
 
     private final PayslipRepository payslipRepository;
     private final EmployeeRepository employeeRepository;
+    private final PayslipMapper payslipMapper;
 
-    public PayslipService(PayslipRepository payslipRepository, EmployeeRepository employeeRepository) {
-        this.payslipRepository = payslipRepository;
-        this.employeeRepository = employeeRepository;
-    }
 
-    public Payslip generatePayslip(PayslipDTO dto) {
+    public PayslipDTO generatePayslip(PayslipDTO dto) {
 
         Employee employee = employeeRepository.findById(dto.getEmployeeId())
                         .orElseThrow(() -> new ResourceNotFoundException("Employee not found: " + dto.getEmployeeId()));
@@ -41,10 +41,11 @@ public class PayslipService {
                 .employee(employee)
                 .build();
 
-        return payslipRepository.save(payslip);
+        var result = payslipRepository.save(payslip);
+        return payslipMapper.toDto(result);
     }
 
-    public List<Payslip> getEmployeePayslips(Long employeeId) {
-        return payslipRepository.findByEmployeeId(employeeId);
+    public List<PayslipDTO> getEmployeePayslips(Long employeeId) {
+        return payslipMapper.toDto(payslipRepository.findByEmployeeId(employeeId));
     }
 }
