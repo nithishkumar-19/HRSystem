@@ -1,6 +1,7 @@
 package com.nithish.Enterprise.HR.Management.System.Controller;
 
 import com.nithish.Enterprise.HR.Management.System.Dto.EmployeeDTO;
+import com.nithish.Enterprise.HR.Management.System.Dto.EmployeeResponse;
 import com.nithish.Enterprise.HR.Management.System.Entity.Employee;
 import com.nithish.Enterprise.HR.Management.System.Service.EmployeeService;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -26,7 +27,7 @@ public class EmployeeController {
 
     @PreAuthorize("hasRole('HR')")
     @GetMapping("/all")
-    public List<Employee> getAllEmployees() {
+    public List<EmployeeResponse> getAllEmployees() {
         return employeeService.getAllEmployees();
     }
 }

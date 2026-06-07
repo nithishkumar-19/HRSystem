@@ -1,32 +1,30 @@
 package com.nithish.Enterprise.HR.Management.System.Service;
 
 import com.nithish.Enterprise.HR.Management.System.Dto.EmployeeDTO;
+import com.nithish.Enterprise.HR.Management.System.Dto.EmployeeResponse;
 import com.nithish.Enterprise.HR.Management.System.Entity.Employee;
 import com.nithish.Enterprise.HR.Management.System.Entity.User;
 import com.nithish.Enterprise.HR.Management.System.Enum.DocumentStatus;
 import com.nithish.Enterprise.HR.Management.System.Enum.EmployeeStatus;
 import com.nithish.Enterprise.HR.Management.System.Enum.Role;
 import com.nithish.Enterprise.HR.Management.System.Exception.ResourceNotFoundException;
+import com.nithish.Enterprise.HR.Management.System.Mapper.UserMapper;
 import com.nithish.Enterprise.HR.Management.System.Repository.EmployeeRepository;
 import com.nithish.Enterprise.HR.Management.System.Repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-
-    public EmployeeService(EmployeeRepository employeeRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
-
-        this.employeeRepository = employeeRepository;
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
+    private final UserMapper userMapper;
 
     public Employee createEmployee(EmployeeDTO dto) {
 
@@ -57,7 +55,7 @@ public class EmployeeService {
                 .department(dto.getDepartment())
                 .designation(dto.getDesignation())
                 .joiningDate(dto.getJoiningDate())
-                .status(EmployeeStatus.PENDING)
+                .status(EmployeeStatus.COMPLETED)
 
                 // 🔥 THIS IS THE MOST IMPORTANT LINE
                 .user(user)
@@ -67,8 +65,8 @@ public class EmployeeService {
         return employeeRepository.save(employee);
     }
 
-    public List<Employee> getAllEmployees() {
-        return employeeRepository.findAll();
+    public List<EmployeeResponse> getAllEmployees() {
+        return  userMapper.toDto(employeeRepository.findAll()) ;
     }
 
     public Employee getEmployee(Long id) {

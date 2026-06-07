@@ -1,12 +1,16 @@
 package com.nithish.Enterprise.HR.Management.System.Controller;
 
+import com.nithish.Enterprise.HR.Management.System.Dto.CertificateResponse;
 import com.nithish.Enterprise.HR.Management.System.Dto.CertificationDTO;
 import com.nithish.Enterprise.HR.Management.System.Entity.Certification;
 import com.nithish.Enterprise.HR.Management.System.Entity.Skill;
 import com.nithish.Enterprise.HR.Management.System.Service.CertificationService;
 import jakarta.validation.Valid;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -19,15 +23,19 @@ public class CertificationController {
         this.certificationService = certificationService;
     }
 
-    @PostMapping("/upload")
-    public Certification uploadCertification(@Valid @RequestBody CertificationDTO dto) {
-        return certificationService.uploadCertification(dto);
+    @PostMapping(
+            value = "/upload",
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE
+    )
+    public ResponseEntity<String> uploadCertification(@ModelAttribute  CertificationDTO dto) throws IOException {
+        return ResponseEntity.ok(certificationService.uploadCertification(dto));
     }
 
     @GetMapping("/all")
-    public List<Certification> getAllCertifications() {
-        return certificationService.getAllCertifications();
+    public List<CertificateResponse> getAllCertifications(@RequestParam long empId) {
+        return certificationService.getAllCertifications(empId);
     }
+
 
     @PutMapping("/approve/{id}")
     public Certification approveCertification(@PathVariable Long id, @RequestParam String remarks) {

@@ -33,7 +33,7 @@ public class SecurityConfig {
                         .hasAnyRole("HR","MANAGER","EMPLOYEE")
 
                         .requestMatchers("/certification/**")
-                        .hasAnyRole("HR","MANAGER")
+                        .hasAnyRole("HR","MANAGER" ,"EMPLOYEE")
 
                         .requestMatchers("/leave/**")
                         .hasAnyRole("HR","MANAGER","EMPLOYEE")

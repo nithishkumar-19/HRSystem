@@ -1,6 +1,9 @@
 package com.nithish.Enterprise.HR.Management.System.Dto;
 
-import jakarta.validation.constraints.*;
+import com.nithish.Enterprise.HR.Management.System.Enum.CertificationStatus;
+import jakarta.persistence.Enumerated;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -9,10 +12,14 @@ import org.springframework.web.multipart.MultipartFile;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CertificationDTO {
+public class CertificateResponse {
+
 
     @NotNull(message = "Employee ID required")
-    private Long employeeId;
+    private Long id;
+
+
+    private String EmployeeName;
 
     @NotBlank(message = "Certification name required")
     private String certificationName;
@@ -20,12 +27,8 @@ public class CertificationDTO {
     @NotBlank(message = "Organization required")
     private String issuingOrganization;
 
-    @NotNull(message = "Certificate file required")
-    private MultipartFile file;
-
     @NotBlank(message = "File name required")
     private String certificateFileName;
 
-    @NotBlank(message = "File path required")
-    private String certificateFilePath;
+    private CertificationStatus status ;
 }

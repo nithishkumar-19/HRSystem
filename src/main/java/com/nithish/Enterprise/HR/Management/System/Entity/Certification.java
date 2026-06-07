@@ -22,12 +22,13 @@ public class Certification extends Auditable {
 
     private String issuingOrganization;
 
-    private String certificateFileName;
-
-    private String certificateFilePath;
+    private String fileName;
 
     @Enumerated(EnumType.STRING)
     private CertificationStatus status;
+
+    @Lob
+    private byte[] data;
 
     private String managerRemarks;
 

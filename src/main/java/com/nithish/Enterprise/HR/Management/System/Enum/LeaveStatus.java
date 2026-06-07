@@ -6,6 +6,8 @@ public enum LeaveStatus {
 
     MANAGER_APPROVED,
 
+    MANAGER_REJECTED,
+
     APPROVED,
 
     REJECTED

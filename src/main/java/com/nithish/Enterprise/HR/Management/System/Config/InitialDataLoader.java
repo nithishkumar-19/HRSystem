@@ -1,10 +1,12 @@
 package com.nithish.Enterprise.HR.Management.System.Config;
 
 import com.nithish.Enterprise.HR.Management.System.Entity.Employee;
+import com.nithish.Enterprise.HR.Management.System.Entity.LeaveBalance;
 import com.nithish.Enterprise.HR.Management.System.Entity.User;
 import com.nithish.Enterprise.HR.Management.System.Enum.EmployeeStatus;
 import com.nithish.Enterprise.HR.Management.System.Enum.Role;
 import com.nithish.Enterprise.HR.Management.System.Repository.EmployeeRepository;
+import com.nithish.Enterprise.HR.Management.System.Repository.LeaveBalanceRepository;
 import com.nithish.Enterprise.HR.Management.System.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
@@ -20,8 +22,7 @@ public class InitialDataLoader implements CommandLineRunner {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final EmployeeRepository employeeRepository;
-
-
+    private final LeaveBalanceRepository leaveBalanceRepository;
 
     @Override
     public void run(String... args) {
@@ -55,6 +56,12 @@ public class InitialDataLoader implements CommandLineRunner {
                     .build();
 
             employeeRepository.save(empHr);
+
+            if (!leaveBalanceRepository.existsByEmployeeFirstName("Harish")) {
+                var lbHarish = LeaveBalance.builder().
+                        remainingLeaves(5).totalLeaves(5).usedLeaves(0).employee(empHr).build();
+                leaveBalanceRepository.save(lbHarish);
+            }
         }
 
         if (userRepository.findByUsername("Sathish").isEmpty()) {
@@ -85,6 +92,12 @@ public class InitialDataLoader implements CommandLineRunner {
                     .build();
 
             employeeRepository.save(empMgr);
+
+            if (!leaveBalanceRepository.existsByEmployeeFirstName("Sathish")) {
+                var lbSathish = LeaveBalance.builder().remainingLeaves(5).totalLeaves(5).usedLeaves(0).employee(empMgr).build();
+                leaveBalanceRepository.save(lbSathish);
+
+            }
         }
 
         if (userRepository.findByUsername("Vignesh").isEmpty()) {
@@ -115,7 +128,19 @@ public class InitialDataLoader implements CommandLineRunner {
                     .build();
 
             employeeRepository.save(empEmployee);
+
+            if (!leaveBalanceRepository.existsByEmployeeFirstName("Vignesh")) {
+                var lbVignesh = LeaveBalance.builder().remainingLeaves(5).totalLeaves(5).usedLeaves(0).employee(empEmployee).build();
+                leaveBalanceRepository.save(lbVignesh);
+
+            }
         }
+
+
+
+
+
+
 
         System.out.println("Default Users Created Successfully");
     }
