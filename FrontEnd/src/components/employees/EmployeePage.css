@@ -1,0 +1,22 @@
+.employee-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.employee-form__submit {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.mobile-group {
+  display: flex;
+  gap: 8px;
+}
+
+.mobile-group .field__select {
+  width: 120px;
+  flex-shrink: 0;
+}
