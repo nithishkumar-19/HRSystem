@@ -21,6 +21,12 @@ public interface LeaveRequestRepository extends JpaRepository<LeaveRequest, Long
             List<LeaveStatus> statuses,
             LocalDate fromDate);
 
+    List<LeaveRequest> findByStatusIn(List<LeaveStatus> statuses);
+
+    int countByStatusIn(List<LeaveStatus> statuses);
+
+    //int countByStatusInAndFromDateAfter(List<LeaveStatus> statuses);
+
 
 
 }

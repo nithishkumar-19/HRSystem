@@ -93,20 +93,27 @@ public class LeaveService {
         switch (Employee.getUser().getRole()) {
 
             case HR -> {
-                leaves = leaveRequestRepository.findByStatusInAndFromDateAfter(
+                leaves = leaveRequestRepository.findByStatusIn(
                         List.of(
                                 LeaveStatus.MANAGER_APPROVED,
-                                LeaveStatus.MANAGER_REJECTED
-                        ),
-                        LocalDate.now()
+                                LeaveStatus.MANAGER_REJECTED,
+                                LeaveStatus.APPROVED,
+                                LeaveStatus.PENDING,
+                                LeaveStatus.REJECTED
+                        )
                 );
             }
 
             case MANAGER -> {
-                leaves = leaveRequestRepository
-                        .findByStatusAndFromDateAfter(
+                leaves = leaveRequestRepository.findByStatusIn(
+                        List.of(
+                                LeaveStatus.MANAGER_APPROVED,
+                                LeaveStatus.MANAGER_REJECTED,
+                                LeaveStatus.APPROVED,
                                 LeaveStatus.PENDING,
-                                LocalDate.now());
+                                LeaveStatus.REJECTED
+                        )
+                );
             }
 
             case EMPLOYEE -> {

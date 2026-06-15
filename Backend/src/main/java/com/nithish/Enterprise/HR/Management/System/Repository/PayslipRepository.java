@@ -8,4 +8,6 @@ import java.util.List;
 public interface PayslipRepository extends JpaRepository<Payslip, Long> {
 
     List<Payslip> findByEmployeeId(Long employeeId);
+
+    int countByEmployeeId(Long employeeId);
 }
