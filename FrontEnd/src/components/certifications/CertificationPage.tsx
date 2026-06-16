@@ -139,39 +139,45 @@ export const CertificationPage = ({
       key: 'status',
       header: 'Status',
       render: (c: Certification) => (
-        <Badge
-          label={c.status}
-          variant={statusVariant(c.status)}
-        />
+          <Badge
+              label={c.status}
+              variant={statusVariant(c.status)}
+          />
       ),
     },
-    ...(canReview && role == "MANAGER"
-      ? [
+    ...(canReview && role === "MANAGER"
+        ? [
           {
             key: 'action',
             header: 'Action',
-            render: (c: Certification) => (
-              <>
-                <Button
-                  size="sm"
-                  variant="success"
-                  onClick={() => handleApprove(c.id)}
-                >
-                  Approve
-                </Button>
+            render: (c: Certification) => {
+              if (c.status !== 'PENDING') {
+                return null;
+              }
 
-                <Button
-                  size="sm"
-                  variant="danger"
-                  onClick={() => handleReject(c.id)}
-                >
-                  Reject
-                </Button>
-              </>
-            ),
+              return (
+                  <>
+                    <Button
+                        size="sm"
+                        variant="success"
+                        onClick={() => handleApprove(c.id)}
+                    >
+                      Approve
+                    </Button>
+
+                    <Button
+                        size="sm"
+                        variant="danger"
+                        onClick={() => handleReject(c.id)}
+                    >
+                      Reject
+                    </Button>
+                  </>
+              );
+            },
           },
         ]
-      : []),
+        : []),
   ];
 
   return (

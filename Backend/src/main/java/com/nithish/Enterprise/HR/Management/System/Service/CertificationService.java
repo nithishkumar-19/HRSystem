@@ -103,12 +103,12 @@ public class CertificationService {
 
             case HR -> {
                 certificationList = certificateMapper.toDto(certificationRepository.findByStatusIn(
-                        List.of(CertificationStatus.APPROVED)));
+                        List.of(CertificationStatus.APPROVED,CertificationStatus.REJECTED)));
             }
 
             case MANAGER -> {
                 certificationList = certificateMapper.toDto(certificationRepository.findByStatusIn(
-                        List.of(CertificationStatus.PENDING)));
+                        List.of(CertificationStatus.PENDING,CertificationStatus.APPROVED,CertificationStatus.REJECTED)));
             }
 
             case EMPLOYEE -> {

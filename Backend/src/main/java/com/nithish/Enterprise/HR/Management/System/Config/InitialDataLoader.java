@@ -136,12 +136,6 @@ public class InitialDataLoader implements CommandLineRunner {
             }
         }
 
-
-
-
-
-
-
         System.out.println("Default Users Created Successfully");
     }
 }
