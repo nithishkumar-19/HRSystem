@@ -34,4 +34,10 @@ public class DashboardController {
 
         return dashboardService.getManagerDashboard();
     }
+
+    @GetMapping("/notifications/{empId}")
+    public int getNotificationCount(@PathVariable long empId) {
+
+        return dashboardService.getNotificationCount(empId);
+    }
 }

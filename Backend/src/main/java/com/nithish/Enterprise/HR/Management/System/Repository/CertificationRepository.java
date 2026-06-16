@@ -12,4 +12,6 @@ public interface CertificationRepository extends JpaRepository<Certification, Lo
     List<Certification> findByStatusIn(List<CertificationStatus> status);
 
     List<Certification> findByIdAndStatusIn(long empId , List<CertificationStatus> status);
+
+    long countByStatusIn(List<CertificationStatus> statuses);
 }
