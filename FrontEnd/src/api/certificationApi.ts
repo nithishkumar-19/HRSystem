@@ -42,4 +42,14 @@ export const certificationApi = {
         `/certification/add-skill/${certId}?skillName=${encodeURIComponent(skillName)}&proficiencyLevel=${encodeURIComponent(proficiencyLevel)}`
       )
       .then((r) => r.data),
+
+    getNotificationCount: async (empId: number) => {
+        const count = await apiClient
+          .get(`/dashboard/notifications/${empId}`)
+          .then((r) => r.data);
+
+        console.log(count);
+
+        return count;
+}
 };

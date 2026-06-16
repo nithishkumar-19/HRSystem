@@ -1,6 +1,9 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
-import { useAuthStore } from '../../store';
+import { useAuthStore, useCertificationStore } from '../../store';
 import './Layout.css';
+import { IoMdNotifications } from "react-icons/io";
+import NotificationBell from './NotificationBell';
+
 
 const HR_LINKS = [
   { to: '/hr', label: 'Dashboard', icon: '▦' },
@@ -24,6 +27,7 @@ const EMPLOYEE_LINKS = [
 ];
 
 export const Layout = () => {
+  const {notifications} = useCertificationStore();
   const { role, logout } = useAuthStore();
   const navigate = useNavigate();
 
@@ -33,6 +37,17 @@ export const Layout = () => {
       : role === 'MANAGER'
       ? MANAGER_LINKS
       : EMPLOYEE_LINKS;
+  const handleNotificationClick = () => {
+    const route =
+      role === "EMPLOYEE"
+        ? "/employee/payslips"
+        : role === "MANAGER"
+        ? "/manager/leaves"
+        : "/hr/certifications";
+
+        navigate(route);
+  }
+  
 
   const handleLogout = () => {
     logout();
@@ -72,6 +87,7 @@ export const Layout = () => {
       <div className="layout__main">
         <header className="topbar">
           <span className="topbar__title">Human Resources</span>
+          <NotificationBell count={notifications} callBack={handleNotificationClick} />
           <span className="topbar__role">{role ?? 'GUEST'}</span>
         </header>
         <main className="page">
